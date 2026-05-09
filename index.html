@@ -22,16 +22,67 @@
             background-color: #FFF5F7;
         }
 
-        .text-gold {
-            color: #D4AF37;
+        /* Keyframes for animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .border-gold {
-            border-color: #D4AF37;
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Scroll Reveal Base Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s;
         }
 
         .hover-scale {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .hover-scale:hover {
@@ -45,7 +96,6 @@
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <!-- Logo Placeholder -->
                 <img src="asett\logo.webp" alt="Logo Lisa Bouquet"
                     class="w-10 h-10 rounded-full border border-pink-200 shadow-sm">
                 <span class="text-2xl font-serif font-bold text-pink-600 tracking-tight">Lisa Bouquet</span>
@@ -64,7 +114,7 @@
 
     <section id="home" class="relative py-20 bg-soft-pink overflow-hidden">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-center md:text-left space-y-6">
+            <div class="md:w-1/2 text-center md:text-left space-y-6 animate-fade-in-up">
                 <h2 class="text-pink-400 font-semibold tracking-widest uppercase text-sm">Est. Juli 2025</h2>
                 <h1 class="text-5xl md:text-6xl font-serif font-bold leading-tight text-gray-900">
                     Sentuhan <span class="text-pink-600">Elegan</span> untuk Momen Berharga
@@ -75,26 +125,27 @@
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <a href="#products"
-                        class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition shadow-xl">Lihat
+                        class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all hover:shadow-2xl hover:-translate-y-1 shadow-xl">Lihat
                         Katalog</a>
                     <a href="#contact"
-                        class="border-2 border-pink-500 text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-50 transition">Pre-Order
+                        class="border-2 border-pink-500 text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-500 hover:text-white transition-all shadow-md">Pre-Order
                         H-4</a>
                 </div>
             </div>
-            <div class="md:w-1/2 mt-12 md:mt-0 relative flex justify-center">
+            <div class="md:w-1/2 mt-12 md:mt-0 relative flex justify-center animate-fade-in-up"
+                style="animation-delay: 0.3s;">
                 <div
                     class="w-72 h-72 md:w-96 md:h-96 bg-pink-200 rounded-full absolute top-10 -z-10 blur-3xl opacity-50">
                 </div>
                 <img src="asett\beranda.jpg" alt="Featured Bouquet"
-                    class="w-4/5 rounded-2xl shadow-2xl border-4 border-white">
+                    class="w-4/5 rounded-2xl shadow-2xl border-4 border-white animate-float">
             </div>
         </div>
     </section>
 
     <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center mb-16">
+            <div class="max-w-4xl mx-auto text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">Mengenal Lisa Bouquet</h2>
                 <p class="text-gray-600 leading-relaxed text-lg">
                     Berdiri di Boyolali pada Juli 2025, Lisa Bouquet lahir dari kecintaan terhadap kreativitas hadiah.
@@ -104,7 +155,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-start">
-                <div class="bg-soft-pink p-8 rounded-3xl border border-pink-100 shadow-sm">
+                <div class="bg-soft-pink p-8 rounded-3xl border border-pink-100 shadow-sm reveal stagger-1">
                     <h3 class="text-2xl font-serif font-bold text-pink-700 mb-4 flex items-center">
                         <span class="mr-2">✨</span> Visi
                     </h3>
@@ -113,7 +164,7 @@
                         tinggi untuk berbagai momen spesial."
                     </p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm reveal stagger-2">
                     <h3 class="text-2xl font-serif font-bold text-gray-800 mb-4 flex items-center">
                         <span class="mr-2">🚀</span> Misi
                     </h3>
@@ -130,7 +181,7 @@
 
     <section id="products" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">Portofolio Kami</h2>
                 <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full"></div>
             </div>
@@ -138,10 +189,13 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Product 1: Money Bouquet -->
                 <div
-                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="h-80 overflow-hidden">
+                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-1">
+                    <div class="h-80 overflow-hidden relative">
                         <img src="asett\buket uang.jpg" alt="Money Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div
+                            class="absolute inset-0 bg-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Buket Uang (Money Bouquet)</h3>
@@ -155,10 +209,13 @@
 
                 <!-- Product 2: Artificial Bouquet -->
                 <div
-                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="h-80 overflow-hidden">
+                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-2">
+                    <div class="h-80 overflow-hidden relative">
                         <img src="asett\palsu.webp" alt="Artificial Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div
+                            class="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Bunga Palsu (Artificial)</h3>
@@ -172,10 +229,13 @@
 
                 <!-- Product 3: Custom Bouquet -->
                 <div
-                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                    <div class="h-80 overflow-hidden">
+                    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-3">
+                    <div class="h-80 overflow-hidden relative">
                         <img src="asett\bebas.webp" alt="Custom Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div
+                            class="absolute inset-0 bg-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Custom Request</h3>
@@ -192,7 +252,7 @@
 
     <section id="team" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">Tim di Balik Layar</h2>
                 <p class="text-gray-500">Mahasiswa S1 Manajemen Universitas Slamet Riyadi</p>
             </div>
@@ -200,7 +260,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Team Member 1 -->
                 <div
-                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300">
+                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-1">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Early" alt="Early Clarissa"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Early Clarissa Fais N</h4>
@@ -212,7 +272,7 @@
 
                 <!-- Team Member 2 -->
                 <div
-                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300">
+                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-2">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Ivony" alt="Ivony Tasya"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Ivony Tasya Artha M</h4>
@@ -224,7 +284,7 @@
 
                 <!-- Team Member 3 -->
                 <div
-                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300">
+                    class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-3">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Aulia" alt="Aulia Gadis"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Aulia Gadis Pratiwi</h4>
@@ -240,11 +300,10 @@
     <section id="contact" class="py-20 bg-gray-900 text-white rounded-t-[3rem]">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8">
+                <div class="space-y-8 reveal">
                     <div>
                         <h2 class="text-4xl font-serif font-bold mb-4">Mulai Momen Spesial Anda</h2>
-                        <p class="text-gray-400 text-lg">
-                            Pesan sekarang dan berikan hadiah terbaik yang tak terlupakan.
+                        <p class="text-gray-400 text-lg">Pesan sekarang dan berikan hadiah terbaik yang tak terlupakan.
                         </p>
                     </div>
 
@@ -263,17 +322,10 @@
                                 <p class="text-gray-400">Pre-Order H-4 sebelum hari H.</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="bg-pink-500/20 p-3 rounded-xl text-pink-500">💰</div>
-                            <div>
-                                <h5 class="font-bold">Harga Ramah Kantong</h5>
-                                <p class="text-gray-400">Kualitas premium dengan harga pelajar.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white text-gray-900 p-8 rounded-3xl shadow-2xl">
+                <div class="bg-white text-gray-900 p-8 rounded-3xl shadow-2xl reveal stagger-1">
                     <h3 class="text-2xl font-bold mb-6">Butuh Konsultasi Buket?</h3>
                     <form onsubmit="return false;" class="space-y-4">
                         <div>
@@ -295,7 +347,6 @@
                             Hubungi Admin via WhatsApp
                         </button>
                     </form>
-                    <p class="text-xs text-gray-400 mt-4 text-center">Kami akan merespons dalam waktu 1x24 jam.</p>
                 </div>
             </div>
 
@@ -305,14 +356,36 @@
         </div>
     </section>
 
-    <!-- Smooth Scrolling Helper -->
     <script>
+        // Intersection Observer for Scroll Reveal
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver(revealCallback, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
