@@ -5,13 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lisa Bouquet - Buket Kreatif & Eksklusif</title>
+
+    <link rel="icon" type="image/webp" href="asett\logo.webp">
+    <link rel="shortcut icon" href="asett\logo.webp" type="image/x-icon">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
         rel="stylesheet">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
 
         .font-serif {
@@ -22,7 +28,6 @@
             background-color: #FFF5F7;
         }
 
-        /* Keyframes for animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -37,15 +42,15 @@
 
         @keyframes float {
             0% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotate(0deg);
             }
 
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-15px) rotate(2deg);
             }
 
             100% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotate(0deg);
             }
         }
 
@@ -57,7 +62,22 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Scroll Reveal Base Styles */
+        #particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -69,35 +89,29 @@
             transform: translateY(0);
         }
 
-        .stagger-1 {
-            transition-delay: 0.1s;
+        /* Transisi halus untuk slideshow gambar */
+        #slideshow-image {
+            transition: opacity 0.8s ease-in-out;
         }
 
-        .stagger-2 {
-            transition-delay: 0.2s;
-        }
-
-        .stagger-3 {
-            transition-delay: 0.3s;
-        }
-
-        .hover-scale {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .hover-scale:hover {
-            transform: scale(1.05);
+        nav,
+        section {
+            position: relative;
+            z-index: 10;
         }
     </style>
 </head>
 
 <body class="bg-white text-gray-800 scroll-smooth">
 
+    <div id="particle-container"></div>
+
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <img src="asett\logo.webp" alt="Logo Lisa Bouquet"
-                    class="w-10 h-10 rounded-full border border-pink-200 shadow-sm">
+                    class="w-10 h-10 rounded-full border border-pink-200 shadow-sm"
+                    onerror="this.src='https://placehold.co/40x40/FBCFE8/831843?text=LB'">
                 <span class="text-2xl font-serif font-bold text-pink-600 tracking-tight">Lisa Bouquet</span>
             </div>
             <div class="hidden md:flex space-x-8 font-medium text-gray-600">
@@ -106,7 +120,8 @@
                 <a href="#products" class="hover:text-pink-500 transition">Produk</a>
                 <a href="#team" class="hover:text-pink-500 transition">Tim</a>
             </div>
-            <a href="#contact"
+            <a href="https://wa.me/62882003072007?text=Halo%20Lisa%20Bouquet,%20saya%20tertarik%20untuk%20memesan%20buket%20eksklusif!"
+                target="_blank"
                 class="bg-pink-500 text-white px-5 py-2 rounded-full font-semibold hover:bg-pink-600 transition shadow-lg text-sm">Pesan
                 Sekarang</a>
         </div>
@@ -127,7 +142,8 @@
                     <a href="#products"
                         class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all hover:shadow-2xl hover:-translate-y-1 shadow-xl">Lihat
                         Katalog</a>
-                    <a href="#contact"
+                    <a href="https://wa.me/62882003072007?text=Halo%20Lisa%20Bouquet,%20saya%20ingin%20Pre-Order%20H-4%20untuk%20acara%20mendatang."
+                        target="_blank"
                         class="border-2 border-pink-500 text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-500 hover:text-white transition-all shadow-md">Pre-Order
                         H-4</a>
                 </div>
@@ -137,8 +153,12 @@
                 <div
                     class="w-72 h-72 md:w-96 md:h-96 bg-pink-200 rounded-full absolute top-10 -z-10 blur-3xl opacity-50">
                 </div>
-                <img src="asett\beranda.jpg" alt="Featured Bouquet"
-                    class="w-4/5 rounded-2xl shadow-2xl border-4 border-white animate-float">
+                <!-- Gambar Utama yang Berganti Otomatis -->
+                <div class="relative w-4/5">
+                    <img id="slideshow-image" src="asett\buket uang.jpg" alt="Featured Bouquet"
+                        class="w-full rounded-2xl shadow-2xl border-4 border-white animate-float"
+                        onerror="this.src='https://placehold.co/600x600/FDF2F8/DB2777?text=Buket+Elegan'">
+                </div>
             </div>
         </div>
     </section>
@@ -187,12 +207,13 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Product 1: Money Bouquet -->
+                <!-- Product 1 -->
                 <div
                     class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-1">
                     <div class="h-80 overflow-hidden relative">
                         <img src="asett\buket uang.jpg" alt="Money Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                            onerror="this.src='https://placehold.co/400x500/FDF2F8/DB2777?text=Buket+Uang'">
                         <div
                             class="absolute inset-0 bg-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
@@ -207,12 +228,13 @@
                     </div>
                 </div>
 
-                <!-- Product 2: Artificial Bouquet -->
+                <!-- Product 2 -->
                 <div
                     class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-2">
                     <div class="h-80 overflow-hidden relative">
                         <img src="asett\palsu.webp" alt="Artificial Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                            onerror="this.src='https://placehold.co/400x500/EFF6FF/2563EB?text=Bunga+Palsu'">
                         <div
                             class="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
@@ -227,12 +249,13 @@
                     </div>
                 </div>
 
-                <!-- Product 3: Custom Bouquet -->
+                <!-- Product 3 -->
                 <div
                     class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 reveal stagger-3">
                     <div class="h-80 overflow-hidden relative">
                         <img src="asett\bebas.webp" alt="Custom Bouquet"
-                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                            onerror="this.src='https://placehold.co/400x500/F5F3FF/7C3AED?text=Custom+Design'">
                         <div
                             class="absolute inset-0 bg-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
@@ -258,46 +281,41 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Team Member 1 -->
+                <!-- Early -->
                 <div
                     class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-1">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Early" alt="Early Clarissa"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Early Clarissa Fais N</h4>
                     <p class="text-pink-600 font-medium mb-4 text-sm uppercase tracking-wider">Pengembangan Bisnis</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Lahir di Boyolali, 21 Des 2006. Memiliki ketertarikan kuat pada kewirausahaan kreatif.
-                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Lahir di Boyolali, 21 Des 2006. Memiliki
+                        ketertarikan kuat pada kewirausahaan kreatif.</p>
                 </div>
-
-                <!-- Team Member 2 -->
+                <!-- Ivony -->
                 <div
                     class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-2">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Ivony" alt="Ivony Tasya"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Ivony Tasya Artha M</h4>
                     <p class="text-pink-600 font-medium mb-4 text-sm uppercase tracking-wider">Manajemen Pemasaran</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Lahir di Boyolali, 19 Mei 2005. Berperan dalam analisis data dan strategi pemasaran.
-                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Lahir di Boyolali, 19 Mei 2005. Berperan dalam
+                        analisis data dan pemasaran.</p>
                 </div>
-
-                <!-- Team Member 3 -->
+                <!-- Aulia -->
                 <div
                     class="bg-gray-50 p-8 rounded-3xl text-center shadow-sm border border-gray-100 hover:border-pink-300 transition duration-300 reveal stagger-3">
                     <img src="https://placehold.co/150x150/FBCFE8/831843?text=Aulia" alt="Aulia Gadis"
                         class="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
                     <h4 class="text-xl font-bold text-gray-900">Aulia Gadis Pratiwi</h4>
                     <p class="text-pink-600 font-medium mb-4 text-sm uppercase tracking-wider">Ide & Kreativitas</p>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Lahir di Boyolali, 20 Feb 2006. Berkontribusi dalam pengembangan ide dan penyusunan laporan.
-                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Lahir di Boyolali, 20 Feb 2006. Berkontribusi dalam
+                        pengembangan ide produk.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 bg-gray-900 text-white rounded-t-[3rem]">
+    <footer id="contact" class="py-20 bg-gray-900 text-white rounded-t-[3rem]">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="space-y-8 reveal">
@@ -322,69 +340,158 @@
                                 <p class="text-gray-400">Pre-Order H-4 sebelum hari H.</p>
                             </div>
                         </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-pink-500/20 p-3 rounded-xl text-pink-500">📞</div>
+                            <div>
+                                <h5 class="font-bold">Hubungi Kami</h5>
+                                <p class="text-gray-400">+62 882-0030-72007</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="bg-white text-gray-900 p-8 rounded-3xl shadow-2xl reveal stagger-1">
-                    <h3 class="text-2xl font-bold mb-6">Butuh Konsultasi Buket?</h3>
-                    <form onsubmit="return false;" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Nama Lengkap</label>
-                            <input type="text" placeholder="Masukkan nama"
-                                class="w-full px-4 py-3 bg-gray-100 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Jenis Buket</label>
-                            <select
-                                class="w-full px-4 py-3 bg-gray-100 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none">
-                                <option>Buket Uang</option>
-                                <option>Buket Bunga Palsu</option>
-                                <option>Custom Design</option>
-                            </select>
-                        </div>
-                        <button
-                            class="w-full bg-pink-500 text-white font-bold py-4 rounded-xl hover:bg-pink-600 transition-all shadow-lg active:scale-95">
-                            Hubungi Admin via WhatsApp
+                    <h3 class="text-2xl font-bold mb-6">Konsultasi Buket</h3>
+                    <form id="waForm" class="space-y-4">
+                        <input type="text" id="waName" placeholder="Nama Lengkap"
+                            class="w-full px-4 py-3 bg-gray-100 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none"
+                            required>
+                        <select id="waProduct"
+                            class="w-full px-4 py-3 bg-gray-100 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none">
+                            <option value="Buket Uang">Buket Uang</option>
+                            <option value="Buket Bunga Palsu">Buket Bunga Palsu</option>
+                            <option value="Custom Design">Custom Design</option>
+                        </select>
+                        <button type="button" onclick="sendWhatsApp()"
+                            class="w-full bg-pink-500 text-white font-bold py-4 rounded-xl hover:bg-pink-600 transition-all shadow-lg active:scale-95 flex justify-center items-center gap-2">
+                            <span>Kirim ke WhatsApp</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                            </svg>
                         </button>
                     </form>
                 </div>
             </div>
 
             <div class="mt-20 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                <p>&copy; 2025 Lisa Bouquet. All Rights Reserved. Crafted with ✨ for special moments.</p>
+                <p>&copy; 2026 Lisa Bouquet</p>
             </div>
         </div>
-    </section>
+    </footer>
 
     <script>
-        // Intersection Observer for Scroll Reveal
-        const revealCallback = (entries, observer) => {
+        // --- LOGIKA WHATSAPP ---
+        function sendWhatsApp() {
+            const name = document.getElementById('waName').value;
+            const product = document.getElementById('waProduct').value;
+            const phone = "62882003072007";
+
+            if (!name) {
+                // Menggunakan UI feedback sederhana pengganti alert
+                document.getElementById('waName').classList.add('border-2', 'border-red-500');
+                return;
+            }
+
+            const text = `Halo Lisa Bouquet! Nama saya ${name}. Saya tertarik untuk memesan produk ${product}. Bisa dibantu informasinya?`;
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+            window.open(url, '_blank');
+        }
+
+        // --- LOGIKA SLIDESHOW GAMBAR BERANDA ---
+        const heroImages = [
+            'asett\\buket uang.jpg',
+            'asett\\palsu.webp',
+            'asett\\bebas.webp'
+        ];
+        let currentImageIndex = 0;
+        const slideshowEl = document.getElementById('slideshow-image');
+
+        function changeHeroImage() {
+            // Animasi fade out
+            slideshowEl.style.opacity = '0';
+
+            setTimeout(() => {
+                currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                slideshowEl.src = heroImages[currentImageIndex];
+
+                // Setelah gambar dimuat (atau delay singkat), fade in kembali
+                slideshowEl.style.opacity = '1';
+            }, 800); // Harus sinkron dengan CSS transition durasi
+        }
+
+        // Jalankan slideshow setiap 4 detik
+        setInterval(changeHeroImage, 4000);
+
+        // --- SISTEM PARTIKEL ---
+        const particleContainer = document.getElementById('particle-container');
+        const particleCount = 40;
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+
+            const size = Math.random() * 10 + 4;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+
+            const colors = ['rgba(255,182,193,0.3)', 'rgba(255,215,0,0.2)', 'rgba(255,255,255,0.4)'];
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.filter = `blur(${Math.random() * 2}px)`;
+
+            particleContainer.appendChild(particle);
+
+            let posX = parseFloat(particle.style.left);
+            let posY = parseFloat(particle.style.top);
+            let speedX = (Math.random() - 0.5) * 0.3;
+            let speedY = Math.random() * 0.3 + 0.1;
+
+            function move() {
+                posX += speedX;
+                posY += speedY;
+
+                if (posY > 100) {
+                    posY = -5;
+                    posX = Math.random() * 100;
+                }
+                if (posX > 100) posX = 0;
+                if (posX < 0) posX = 100;
+
+                particle.style.left = `${posX}vw`;
+                particle.style.top = `${posY}vh`;
+
+                requestAnimationFrame(move);
+            }
+            move();
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            setTimeout(createParticle, i * 150);
+        }
+
+        // --- SCROLL REVEAL ---
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        };
+        }, { threshold: 0.15 });
 
-        const observerOptions = {
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver(revealCallback, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
